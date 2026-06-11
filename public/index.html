@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Analyzer</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">AI resume review</p>
+            <h1>Resume Analyzer</h1>
+          </div>
+          <div class="status-pill" id="sourcePill">Ready</div>
+        </div>
+
+        <div class="layout">
+          <form class="panel input-panel" id="resumeForm">
+            <label class="field">
+              <span>Target role</span>
+              <input name="role" id="role" value="Frontend Developer" autocomplete="off" />
+            </label>
+
+            <label class="dropzone" for="resumeFile">
+              <input type="file" name="resume" id="resumeFile" accept=".pdf,.docx,.txt" />
+              <span class="drop-title">Upload resume</span>
+              <span class="drop-meta" id="fileName">PDF, DOCX, or TXT up to 8 MB</span>
+            </label>
+
+            <div class="divider"><span>or paste text</span></div>
+
+            <label class="field grow">
+              <span>Resume text</span>
+              <textarea name="resumeText" id="resumeText" placeholder="Paste resume content here..."></textarea>
+            </label>
+
+            <button class="primary-btn" type="submit" id="analyzeBtn">Analyze resume</button>
+            <p class="form-note">Set OPENAI_API_KEY in .env for live LLM analysis. Without it, the app runs a local backup review.</p>
+          </form>
+
+          <section class="results" aria-live="polite">
+            <div class="score-panel">
+              <div class="score-ring" id="scoreRing">
+                <span id="scoreValue">--</span>
+              </div>
+              <div>
+                <p class="eyebrow">Overall score</p>
+                <h2 id="verdict">Submit a resume to generate a report.</h2>
+              </div>
+            </div>
+
+            <div class="report-grid">
+              <article class="panel">
+                <h3>Extracted details</h3>
+                <dl class="details-list" id="detailsList"></dl>
+              </article>
+
+              <article class="panel">
+                <h3>Improvements</h3>
+                <ul class="clean-list" id="improvementList"></ul>
+              </article>
+
+              <article class="panel wide">
+                <h3>Gaps checklist</h3>
+                <div class="checklist" id="gapList"></div>
+              </article>
+
+              <article class="panel">
+                <h3>Keyword suggestions</h3>
+                <div class="chips" id="keywordList"></div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
